@@ -20,3 +20,16 @@ after_success:
   - docker push racheleyg12/multi-nginx
   - docker push racheleyg12/multi-server
   - docker push racheleyg12/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'multi-docker-container'
+  env: 'Multidockercontainer-env'
+  # Might not work - bucket did not recreate
+  bucket_name: 'elasticbeanstalk-us-east-1-439417896106'
+  bucket_path: 'docker-multi'
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
